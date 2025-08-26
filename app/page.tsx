@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
-import SignInBtnGoogle from "@/components/sign-in-btn-google";
-import SignOutBtnGoogle from "@/components/sign-out-btn-google";
+import { HeroHeader } from "@/components/header";
+import HeroSection from "@/components/hero-section";
 import { headers } from "next/headers";
 
 export default async function Home() {
@@ -8,9 +8,8 @@ export default async function Home() {
   const userLoggedin = session?.session.id;
   return (
     <div>
-      Hello World
-      <SignInBtnGoogle />
-      {userLoggedin ? <SignOutBtnGoogle /> : <>Please log in</>}
+      <HeroHeader />
+      <HeroSection />
     </div>
   );
 }

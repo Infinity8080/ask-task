@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function SignOutBtnGoogle() {
+export default function SignOutBtn() {
   const router = useRouter();
   const handleSignIn = async () => {
     try {
