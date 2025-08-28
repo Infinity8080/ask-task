@@ -3,6 +3,7 @@ import { authClient, signInGoogle } from "@/lib/auth-client";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { LogOut } from "lucide-react";
 
 export default function SignOutBtn() {
   const router = useRouter();
@@ -18,8 +19,9 @@ export default function SignOutBtn() {
   };
 
   return (
-    <Button variant="default" onClick={handleSignIn}>
-      Sign out!
+    <Button variant="default" onClick={handleSignIn} size={"sm"}>
+      <LogOut />
+      Log Out
     </Button>
   );
 }

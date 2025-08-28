@@ -6,7 +6,12 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { cn } from "@/lib/utils";
 
-const menuItems = [{ name: "Dashboard", href: "/dashboard" }];
+const menuItems = [
+  { name: "Features", href: "#link" },
+  { name: "Solution", href: "#link" },
+  { name: "Pricing", href: "#link" },
+  { name: "About", href: "#link" },
+];
 
 export const HeroHeader = () => {
   const [menuState, setMenuState] = React.useState(false);
@@ -93,6 +98,7 @@ export const HeroHeader = () => {
                     <span>Login</span>
                   </Link>
                 </Button>
+
                 <Button
                   asChild
                   size="sm"

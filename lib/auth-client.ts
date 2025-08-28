@@ -1,11 +1,12 @@
 import { createAuthClient } from "better-auth/react";
 export const authClient = createAuthClient({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:3000/",
 });
 const signInGoogle = async () => {
   const data = await authClient.signIn.social({
     provider: "google",
   });
+  console.log("done");
   return data;
 };
 const signOutGoogle = async () => {
