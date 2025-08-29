@@ -40,6 +40,32 @@ const tools = {
       return weatherData;
     },
   }),
+  getStockPrice: tool({
+    description:
+      "Get a structured price card containing real-time stock market data for the requested symbol.",
+    inputSchema: z.object({
+      symbol: z
+        .string()
+        .describe("Symbol you want to get the stock market data for"),
+    }),
+    execute: async ({ symbol }) => {
+      const response = await axios.get(
+        `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.FINHUBB_API_KEY}`
+      );
+      const data = response.data;
+      const stockData = {
+        symbol,
+        currentPrice: data.c,
+        priceChange: data.d,
+        percentChange: data.dp,
+        openPrice: data.o,
+        highPrice: data.h,
+        lowPrice: data.l,
+        previousClose: data.pc,
+      };
+      return stockData;
+    },
+  }),
 };
 
 export type ChatTools = InferUITools<typeof tools>;

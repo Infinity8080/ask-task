@@ -27,6 +27,7 @@ import {
   CardFooter,
 } from "./ui/card";
 import WeatherCard from "./weather-card";
+import StockCard from "./stock-card";
 type Props = {
   userAvatarSrc: string;
 };
@@ -76,6 +77,19 @@ export default function UserConversations({ userAvatarSrc }: Props) {
                             return null;
                         }
 
+                      case "tool-getStockPrice":
+                        switch (part.state) {
+                          case "input-streaming":
+                            return (
+                              <Response key={`${message.id}-getWeather-${i}`}>
+                                💹 Receiving stock market request...
+                              </Response>
+                            );
+                          case "output-available":
+                            return <StockCard output={part.output} />;
+                          default:
+                            return null;
+                        }
                       default:
                         return null;
                     }

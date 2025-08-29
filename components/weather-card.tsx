@@ -7,23 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { WeatherCardProps } from "@/types/tool-types";
 
-type Props = {
-  output: {
-    location: {
-      name: any;
-      country: any;
-    };
-    current: {
-      temp_c: any;
-      condition: {
-        text: any;
-        code: any;
-      };
-    };
-  };
-};
-const WeatherCard = (part: Props) => {
+const WeatherCard = (part: WeatherCardProps) => {
   return (
     <Card className="">
       <CardHeader>
