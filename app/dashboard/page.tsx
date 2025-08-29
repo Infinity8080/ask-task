@@ -1,8 +1,13 @@
 import SignOutBtn from "@/components/sign-out-btn";
 import UserConversations from "@/components/user-conversations";
 import { Bubbles } from "lucide-react";
+import { auth } from "@/auth";
+import { headers } from "next/headers";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const session = await auth.api.getSession({ headers: await headers() });
+  const userAvatarSrc = session?.user.image || null;
+
   return (
     <main className="h-screen w-full relative overflow-hidden flex flex-col">
       <div
@@ -26,9 +31,9 @@ export default function Dashboard() {
 
       {/* Dashboard */}
       <div className="relative z-10 p-4 flex-1 flex flex-col">
-        <div className="flex flex-1 overflow-hidden space-x-2">
-          <section className="border-2 p-2 rounded-md flex-1">
-            <UserConversations />
+        <div className="flex flex-1 space-x-2">
+          <section className="border-t-2 p-2  flex-1">
+            <UserConversations userAvatarSrc={userAvatarSrc ?? ""} />
           </section>
         </div>
       </div>
