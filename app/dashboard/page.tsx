@@ -5,11 +5,13 @@ import { auth } from "@/auth";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
+import { getMessagesByUserId } from "@/lib/db-utils";
 
 export default async function Dashboard() {
   const session = await auth.api.getSession({ headers: await headers() });
   const userAvatarSrc = session?.user.image || null;
-  console.log(userAvatarSrc);
+  const prevMessages = await getMessagesByUserId(session?.user.id as string);
+  console.log(userAvatarSrc, prevMessages);
 
   return (
     <main className="h-screen w-full relative overflow-hidden flex flex-col">

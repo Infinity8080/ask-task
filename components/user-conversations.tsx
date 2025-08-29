@@ -14,38 +14,32 @@ import {
   ConversationContent,
   ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
-import { toast } from "sonner";
 import { Message, MessageAvatar, MessageContent } from "./ai-elements/message";
 import { DefaultChatTransport } from "ai";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardAction,
-  CardContent,
-  CardFooter,
-} from "./ui/card";
 import WeatherCard from "./weather-card";
 import StockCard from "./stock-card";
+import { saveMessage } from "@/lib/db-utils";
+
 type Props = {
   userAvatarSrc: string;
 };
 
 export default function UserConversations({ userAvatarSrc }: Props) {
-  const formOnSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (input) {
-      sendMessage({ text: input });
-      setInput("");
-    }
-  };
   const [input, setInput] = useState<string>("");
   const { messages, sendMessage, status } = useChat<ChatMessage>({
     transport: new DefaultChatTransport({
       api: "/api/chat",
     }),
   });
+
+  const formOnSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (input) {
+      sendMessage({ text: input });
+      setInput("");
+      saveMessage({ content: input, role: "user" });
+    }
+  };
 
   return (
     <div className="flex flex-col h-full">

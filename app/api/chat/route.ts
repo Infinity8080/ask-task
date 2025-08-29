@@ -1,4 +1,4 @@
-import { openai } from "@ai-sdk/openai";
+
 import { groq } from "@ai-sdk/groq";
 import {
   streamText,
@@ -8,10 +8,20 @@ import {
   InferUITools,
   UIDataTypes,
   stepCountIs,
+
 } from "ai";
-import { NextResponse } from "next/server";
 import { z } from "zod";
 import axios from "axios";
+import { saveMessage } from "@/lib/db-utils";
+import { getMessagesByUserId } from "@/lib/db-utils";
+import { auth } from "@/auth";
+import { headers } from "next/headers";
+import { messagesSelect } from "@/db/schema";
+
+export type SimpleMessage = {
+  role: "user" | "assistant";
+  content: string;
+};
 
 const tools = {
   getWeather: tool({
@@ -72,20 +82,41 @@ export type ChatTools = InferUITools<typeof tools>;
 export type ChatMessage = UIMessage<never, UIDataTypes, ChatTools>;
 
 export async function POST(req: Request) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  function simplifyMessages(fullMessages: messagesSelect[]): SimpleMessage[] {
+    return fullMessages.map(({ role, content }:messagesSelect) => ({
+      role:role as SimpleMessage["role"],
+      content,
+    }));
+  }
+  const prevMessage = await getMessagesByUserId(session?.user.id as string);
+  const prevMessages = simplifyMessages(prevMessage);
+  
+  if (!session?.user?.id) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   try {
     const { messages }: { messages: ChatMessage[] } = await req.json();
-    console.log(messages);
+    
+   
 
     const result = streamText({
       model: groq("openai/gpt-oss-20b"),
-      messages: convertToModelMessages(messages),
+      messages: [...prevMessages, ...convertToModelMessages(messages)],
       tools,
-      stopWhen: stepCountIs(2),
+      stopWhen: stepCountIs(3),
+      onFinish: async (message) => {
+        await saveMessage({
+          content: message.text,
+          role: "assistant",
+        });
+      },
     });
 
     return result.toUIMessageStreamResponse();
   } catch (error) {
-    console.log("Error streaming chat completion:", error);
-    return new Response("Failed to stream chat response ", { status: 500 });
+    console.log("Error in chat completion:", error);
+    return new Response("Failed to process chat request", { status: 500 });
   }
 }
