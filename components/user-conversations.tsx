@@ -86,7 +86,12 @@ export default function UserConversations({ userAvatarSrc }: Props) {
                               </Response>
                             );
                           case "output-available":
-                            return <StockCard output={part.output} />;
+                            return (
+                              <StockCard
+                                output={part.output}
+                                key={`${message.id}-getStock-${i}`}
+                              />
+                            );
                           default:
                             return null;
                         }

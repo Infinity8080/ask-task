@@ -50,11 +50,11 @@ export default function HeroSection() {
                   variants={transitionVariants}
                 >
                   <Link
-                    href="#link"
+                    href="/"
                     className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
                   >
                     <span className="text-foreground text-sm">
-                      Introducing Support for AI Models
+                      Stock tool added! {""}
                     </span>
                     <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 
@@ -77,7 +77,7 @@ export default function HeroSection() {
                   as="h1"
                   className="mt-8 text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]"
                 >
-                  Modern Solutions for Customer Engagement
+                  AI-Powered Assistant with Tool Calling
                 </TextEffect>
                 <TextEffect
                   per="line"
@@ -87,8 +87,8 @@ export default function HeroSection() {
                   as="p"
                   className="mx-auto mt-8 max-w-2xl text-balance text-lg"
                 >
-                  Highly customizable components for building modern websites
-                  and applications that look and feel the way you mean it.
+                  A chat-based AI assistant that can call real-world tools to
+                  fetch live information and present it in a user-friendly way.
                 </TextEffect>
 
                 <AnimatedGroup

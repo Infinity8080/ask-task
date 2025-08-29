@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { HeroHeader } from "@/components/header";
 import HeroSection from "@/components/hero-section";
+import Features from "@/components/features";
 import { headers } from "next/headers";
 
 export default async function Home() {
@@ -10,6 +11,7 @@ export default async function Home() {
     <div>
       <HeroHeader />
       <HeroSection />
+      <Features />
     </div>
   );
 }
