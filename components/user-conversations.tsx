@@ -43,9 +43,9 @@ export default function UserConversations({ userAvatarSrc }: Props) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 max-h-full overflow-y-auto ">
-        <Conversation className="relative w-full" style={{ height: "750px" }}>
-          <ConversationContent>
+      <div className="flex-1 overflow-hidden">
+        <Conversation className="relative w-full h-full">
+          <ConversationContent className="h-full overflow-y-auto">
             {messages.map((message, i) => (
               <Message from={message.role} key={`${message.id}+${i}`}>
                 <MessageContent>
