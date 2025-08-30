@@ -114,10 +114,10 @@ export default function UserConversations({ userAvatarSrc }: Props) {
       </div>
 
       {/* Prompt Input  */}
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center p-2">
         <PromptInput
           onSubmit={formOnSubmitHandler}
-          className="mt-4 relative shrink-0 w-6xl"
+          className="mt-4 relative shrink-0 w-full max-w-6xl"
         >
           <PromptInputTextarea
             onChange={(e) => {
