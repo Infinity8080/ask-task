@@ -11,8 +11,8 @@ export default function Features() {
             Built to cover your needs
           </h2>
           <p className="mt-4">
-            Libero sapiente aliquam quibusdam aspernatur, praesentium iusto
-            repellendus.
+            AI Chatbot for your daily tasks, Weather updates, Stock market
+            updates, and remembers your conversation history.
           </p>
         </div>
         <div className="@min-4xl:max-w-full @min-4xl:grid-cols-3 mx-auto mt-8 grid max-w-sm gap-6 *:text-center md:mt-16">

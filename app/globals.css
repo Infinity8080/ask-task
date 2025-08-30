@@ -3,8 +3,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*tweakcn*/
-/* :root {
+/* tweakcn*/
+:root {
   --background: oklch(0.9777 0.0041 301.4256);
   --foreground: oklch(0.3651 0.0325 287.0807);
   --card: oklch(1.0000 0 0);
@@ -151,7 +151,7 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
-} */
+}
 
 
 
@@ -169,7 +169,7 @@
 
 
 
-@theme inline {
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -276,7 +276,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-}
+} */
 
 @layer base {
   * {

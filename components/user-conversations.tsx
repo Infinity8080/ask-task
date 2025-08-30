@@ -66,7 +66,12 @@ export default function UserConversations({ userAvatarSrc }: Props) {
                               </Response>
                             );
                           case "output-available":
-                            return <WeatherCard output={part.output} />;
+                            return (
+                              <WeatherCard
+                                output={part.output}
+                                key={`${message.id}-getWeather-${i}`}
+                              />
+                            );
                           default:
                             return null;
                         }
@@ -109,25 +114,27 @@ export default function UserConversations({ userAvatarSrc }: Props) {
       </div>
 
       {/* Prompt Input  */}
-      <PromptInput
-        onSubmit={formOnSubmitHandler}
-        className="mt-4 relative shrink-0"
-      >
-        <PromptInputTextarea
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
-          value={input}
-          placeholder="Ask a question..."
-        />
-        <PromptInputToolbar>
-          <PromptInputSubmit
-            className="absolute right-1 bottom-1"
-            disabled={status !== "ready" || !input}
-            status={status}
+      <div className="flex items-center justify-center">
+        <PromptInput
+          onSubmit={formOnSubmitHandler}
+          className="mt-4 relative shrink-0 w-6xl"
+        >
+          <PromptInputTextarea
+            onChange={(e) => {
+              setInput(e.target.value);
+            }}
+            value={input}
+            placeholder="Ask a question..."
           />
-        </PromptInputToolbar>
-      </PromptInput>
+          <PromptInputToolbar>
+            <PromptInputSubmit
+              className="absolute right-1 bottom-1"
+              disabled={status !== "ready" || !input}
+              status={status}
+            />
+          </PromptInputToolbar>
+        </PromptInput>
+      </div>
     </div>
   );
 }

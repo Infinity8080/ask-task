@@ -167,7 +167,7 @@ export default function HeroSection() {
                     src="/mail2-light.png"
                     alt="app screen"
                     width="2700"
-                    height="1440"
+                    height="1430"
                   />
                 </div>
               </div>
