@@ -3,11 +3,14 @@ import { getSessionCookie } from "better-auth/cookies";
 
 export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
+  const { pathname } = request.nextUrl;
 
-  // THIS IS NOT SECURE!
-  // This is the recommended approach to optimistically redirect users
-  // We recommend handling auth checks in each page/route
-  if (!sessionCookie) {
+  
+  if (sessionCookie && (pathname.startsWith("/login") || pathname.startsWith("/signup"))) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  if (!sessionCookie && pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -15,5 +18,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard"], // Specify the routes the middleware applies to
+  matcher: ["/dashboard", "/login", "/signup"], 
 };
