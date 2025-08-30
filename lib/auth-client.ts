@@ -6,7 +6,7 @@ const signInGoogle = async () => {
   const data = await authClient.signIn.social({
     provider: "google",
   });
-  console.log("done");
+  
   return data;
 };
 const signOutGoogle = async () => {

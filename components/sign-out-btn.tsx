@@ -1,5 +1,5 @@
 "use client";
-import { authClient, signInGoogle } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";

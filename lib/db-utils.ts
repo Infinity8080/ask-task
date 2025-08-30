@@ -1,5 +1,4 @@
 "use server"
-import { ChatMessage } from "@/app/api/chat/route";
 import { db } from "@/db/db";
 import { messages } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
@@ -31,7 +30,7 @@ export async function saveMessage({content,role}:Props) {
  
 }
 
-export async function getMessagesByUserId(userId: string, limit = 50) {
+export async function getMessagesByUserId(userId: string) {
   try {
     const response =  await db.query.messages.findMany({
         where:eq(messages.userId, userId),

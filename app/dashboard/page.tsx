@@ -10,8 +10,6 @@ import { getMessagesByUserId } from "@/lib/db-utils";
 export default async function Dashboard() {
   const session = await auth.api.getSession({ headers: await headers() });
   const userAvatarSrc = session?.user.image || null;
-  const prevMessages = await getMessagesByUserId(session?.user.id as string);
-  console.log(userAvatarSrc, prevMessages);
 
   return (
     <main className="h-screen w-full relative overflow-hidden flex flex-col">

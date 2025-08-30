@@ -1,24 +1,24 @@
 "use client";
+import type { ChatMessage } from "@/app/api/chat/route";
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/components/ai-elements/conversation";
+import { Response } from "@/components/ai-elements/response";
+import { saveMessage } from "@/lib/db-utils";
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import { FormEvent, useState } from "react";
+import { Message, MessageAvatar, MessageContent } from "./ai-elements/message";
 import {
   PromptInput,
   PromptInputSubmit,
   PromptInputTextarea,
   PromptInputToolbar,
 } from "./ai-elements/prompt-input";
-import { useChat } from "@ai-sdk/react";
-import type { ChatMessage } from "@/app/api/chat/route";
-import { Response } from "@/components/ai-elements/response";
-import {
-  Conversation,
-  ConversationContent,
-  ConversationScrollButton,
-} from "@/components/ai-elements/conversation";
-import { Message, MessageAvatar, MessageContent } from "./ai-elements/message";
-import { DefaultChatTransport } from "ai";
-import WeatherCard from "./weather-card";
 import StockCard from "./stock-card";
-import { saveMessage } from "@/lib/db-utils";
+import WeatherCard from "./weather-card";
 
 type Props = {
   userAvatarSrc: string;
