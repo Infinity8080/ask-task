@@ -42,10 +42,10 @@ export default function UserConversations({ userAvatarSrc }: Props) {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-hidden">
-        <Conversation className="relative w-full h-full">
-          <ConversationContent className="h-full overflow-y-auto">
+    <div className="flex flex-col h-[calc(100vh-4rem)]">
+      <div className="flex-1 min-h-0">
+        <Conversation className="h-full">
+          <ConversationContent>
             {messages.map((message, i) => (
               <Message from={message.role} key={`${message.id}+${i}`}>
                 <MessageContent>
@@ -80,7 +80,7 @@ export default function UserConversations({ userAvatarSrc }: Props) {
                         switch (part.state) {
                           case "input-streaming":
                             return (
-                              <Response key={`${message.id}-getWeather-${i}`}>
+                              <Response key={`${message.id}-getStock-${i}`}>
                                 💹 Receiving stock market request...
                               </Response>
                             );
@@ -112,12 +112,12 @@ export default function UserConversations({ userAvatarSrc }: Props) {
           <ConversationScrollButton />
         </Conversation>
       </div>
-
-      {/* Prompt Input  */}
-      <div className="flex items-center justify-center p-2">
+      {/* Prompt Input */}
+      <div className="flex-shrink-0 p-4 bg-background border-t">
+        {" "}
         <PromptInput
           onSubmit={formOnSubmitHandler}
-          className="mt-4 relative shrink-0 w-full max-w-6xl"
+          className="relative w-full max-w-6xl mx-auto"
         >
           <PromptInputTextarea
             onChange={(e) => {

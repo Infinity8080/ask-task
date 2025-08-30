@@ -25,9 +25,9 @@ export type SimpleMessage = {
 
 const tools = {
   getWeather: tool({
-    description: "Get the weather for a location",
+    description: "ONLY call this tool when user explicitly asks for weather information and provides a specific city name. Examples: 'What's the weather in London?', 'How's the weather in Tokyo today?'. DO NOT call for greetings, casual conversation, or vague requests.",
     inputSchema: z.object({
-      city: z.string().describe("The city to get the weather for"),
+      city: z.string().describe("The specific city name mentioned by the user for weather lookup"),
     }),
     execute: async ({ city }) => {
       const response = await axios.get(
@@ -52,7 +52,7 @@ const tools = {
   }),
   getStockPrice: tool({
     description:
-      "Get a structured price card containing real-time stock market data for the requested symbol.",
+      "Get a structured price card containing real-time stock market data for the requested symbol.DO NOT call for greetings, casual conversation, or vague requests.",
     inputSchema: z.object({
       symbol: z
         .string()
@@ -105,7 +105,7 @@ export async function POST(req: Request) {
       model: groq("openai/gpt-oss-20b"),
       messages: [...prevMessages, ...convertToModelMessages(messages)],
       tools,
-      stopWhen: stepCountIs(3),
+      stopWhen: stepCountIs(2),
       onFinish: async (message) => {
         await saveMessage({
           content: message.text,
